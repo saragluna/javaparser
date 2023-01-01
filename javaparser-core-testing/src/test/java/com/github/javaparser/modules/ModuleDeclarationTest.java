@@ -23,6 +23,7 @@ package com.github.javaparser.modules;
 
 import com.github.javaparser.*;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.expr.IntegerLiteralExpr;
 import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
 import com.github.javaparser.ast.expr.Name;
@@ -97,6 +98,12 @@ class ModuleDeclarationTest {
         ModuleRequiresDirective moduleRequiresStmt = module.getDirectives().get(0).asModuleRequiresStmt();
         assertThat(moduleRequiresStmt.getNameAsString()).isEqualTo("A.B");
         assertThat(moduleRequiresStmt.getModifiers()).isEmpty();
+
+        ModuleRequiresDirective moduleRequiresStmt3 = module.getDirectives().get(3).asModuleRequiresStmt();
+        assertThat(moduleRequiresStmt3.getNameAsString()).isEqualTo("G.H");
+        assertTrue(moduleRequiresStmt3.getModifiers().contains(Modifier.staticModifier()));
+        assertTrue(moduleRequiresStmt3.isStatic());
+        assertTrue(moduleRequiresStmt3.isTransitive());
 
         ModuleExportsDirective moduleExportsStmt = module.getDirectives().get(5).asModuleExportsStmt();
         assertThat(moduleExportsStmt.getNameAsString()).isEqualTo("R.S");

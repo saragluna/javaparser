@@ -35,6 +35,7 @@ import com.github.javaparser.metamodel.ModuleRequiresDirectiveMetaModel;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static com.github.javaparser.ast.Modifier.Keyword.STATIC;
 import static com.github.javaparser.ast.Modifier.Keyword.TRANSITIVE;
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
@@ -123,6 +124,10 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
 
     public ModuleRequiresDirective setTransitive(boolean set) {
         return setModifier(TRANSITIVE, set);
+    }
+
+    public boolean isStatic() {
+        return hasModifier(STATIC);
     }
 
     @Override
